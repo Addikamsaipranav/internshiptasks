@@ -66,6 +66,10 @@ const arr = data.map((data,index)=>{
              <br/>
              <button className='btn' onClick={postData}>POST</button>
               <br/><br/>
+              </form>
+
+              <h3 className='data' >Lets update existing todo list through this form . We can check the updated data in console</h3>
+              <form className='primary'>
               <lable>update-TODO</lable><br/>
              <input className='ip' type="text" placeholder='enter the id' value={id} onChange={(e)=>updateID(e.target.value)}></input><br/>
              <input className='ip' type="text" value={todo} placeholder='enter the todo here to update' onChange={(e)=>updateTODO(e.target.value)}></input><br/>
