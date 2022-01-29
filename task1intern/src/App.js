@@ -8,6 +8,10 @@ function App() {
   const [data,setDate] =useState([])
 
   const [title,setTitle] =useState('')
+
+  const [id,updateID] =useState('')
+
+  const [todo,updateTODO] =useState('')
 useEffect(()=>{
  
   axios.get("https://jsonplaceholder.typicode.com/todos")
@@ -28,8 +32,16 @@ const postData = (e) =>{
 const postDelete = (id,e) =>{
   e.preventDefault();
   axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res => console.log('Deleted !!!!! ',res)).catch(err => console.log(err))
+  
 }
 
+const updateData =(id,e) =>{
+    e.preventDefault();
+    axios.put(`https://jsonplaceholder.typicode.com/todos/${id}`,{
+      title:todo
+    }).then(res => console.log('updated !!!!! ',res)).catch(err => console.log(err))
+
+}
 
 const arr = data.map((data,index)=>{
   return (
@@ -49,10 +61,15 @@ const arr = data.map((data,index)=>{
        <h3 className='data'>Lets add new todo list through this form . We can check the added data in console</h3>
 
        <form className='primary'>
-             <label>Title</label>
-             <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}></input>
+             <label>Todo</label><br></br>
+             <input className='ip' type="text" placeholder='enter todo to add' value={title} onChange={(e) => setTitle(e.target.value)}></input>
              <br/>
              <button className='btn' onClick={postData}>POST</button>
+              <br/><br/>
+              <lable>update-TODO</lable><br/>
+             <input className='ip' type="text" placeholder='enter the id' value={id} onChange={(e)=>updateID(e.target.value)}></input><br/>
+             <input className='ip' type="text" value={todo} placeholder='enter the todo here to update' onChange={(e)=>updateTODO(e.target.value)}></input><br/>
+             <button className='btn' onClick={(e)=> updateData(id,e)}>UPDATE</button>
        </form>
        <hr/>
 
@@ -67,7 +84,7 @@ const arr = data.map((data,index)=>{
                    <th style={{border : '1px solid black'}}>Title</th>
                    <th style={{border : '1px solid black'}}>completed</th>
                    <th style={{border : '1px solid black'}}>Delete</th>
-
+   
                 </tr>
                 {arr}
              </table> 
